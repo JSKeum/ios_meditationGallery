@@ -18,6 +18,10 @@ struct DateIndex: Comparable {
         self.date = calendar.startOfDay(for: date)
     }
     
+    var debugDecription: String {
+        return dateFormatter.string(from: date)
+    }
+    
     static func == (lhs: DateIndex, rhs: DateIndex) -> Bool {
         return lhs.date == rhs.date
     }
@@ -33,7 +37,7 @@ let tomorrow = calendar.date(byAdding: DateComponents(day: 1), to: today)!
 
 let dayAfterTomorrow = calendar.date(byAdding: DateComponents(day: 2), to: today)!
 
-let yesterday = calendar.date(byAdding: DateComponents(dat: -1), to : today)!
+let yesterday = calendar.date(byAdding: DateComponents(day: -1), to : today)!
 
 let calendar = Calendar.current
 
