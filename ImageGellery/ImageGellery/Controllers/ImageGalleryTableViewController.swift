@@ -34,12 +34,6 @@ class ImageGalleryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     // MARK: - Table view data source
@@ -48,12 +42,10 @@ class ImageGalleryTableViewController: UITableViewController {
         return sections[section]
     }
     
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return sections.count
     }
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -63,36 +55,30 @@ class ImageGalleryTableViewController: UITableViewController {
         default:
             return 0
         }
-        
     }
     
-
+    private let cellIdentifier = "galleryTitle"
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "galleryTitle", for: indexPath)
-        
-        if (indexPath.section == gallerySection) {
-        cell.textLabel?.text = galleryList[indexPath.row]
-        } else if (indexPath.section == deletedSection) {
-            cell.textLabel?.text = unusedGalleryList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+
+        // custom cell
+        if let titleCell = cell as? ImageGalleryTableViewCell {
+            titleCell.title?.text = (indexPath.section == gallerySection) ? galleryList[indexPath.row] : unusedGalleryList[indexPath.row]
+            
         }
-        // Configure the cell...
+
         
         return cell
     }
     
-    private func indexOfSection(indexPath: IndexPath) {
-        
-    }
     // swipe delete
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
         if (indexPath.section == gallerySection) {
             
-                
-                
                 let deletedItem = galleryList[indexPath.row] ?? nil
                 galleryList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -109,72 +95,9 @@ class ImageGalleryTableViewController: UITableViewController {
             
         }
     }
-    
-    //        let sectionTitle = sectionIndexTitles(for: tableView)
-    //
-    //        for title in sectionTitle ?? [] {
-    //            if (title == "Gallery List") {
-    //                if editingStyle == .delete {
-    //                    galleryList.remove(at: indexPath.row)
-    //                    tableView.deleteRows(at: [indexPath], with: .fade)
-    //                }
-    //            }
-    //        }
-    
-    
-
-
-
-/*
- // Override to support conditional editing of the table view.
- override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
- // Return false if you do not want the specified item to be editable.
- return true
- }
- */
-
-/*
- // Override to support editing the table view.
- override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
- if editingStyle == .delete {
- // Delete the row from the data source
- tableView.deleteRows(at: [indexPath], with: .fade)
- } else if editingStyle == .insert {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
- 
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
- // Return false if you do not want the item to be re-orderable.
- return true
- }
- */
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
-
+    // *** stored properties used in extensions
+    private var beforeIndexPath: IndexPath? = nil
 }
-
-
-
 
 // swipe tableView
 extension ImageGalleryTableViewController {
@@ -183,5 +106,29 @@ extension ImageGalleryTableViewController {
         if splitViewController?.preferredDisplayMode != .primaryOverlay {
             splitViewController?.preferredDisplayMode = .primaryOverlay
         }
+    }
+}
+
+// segue
+extension ImageGalleryTableViewController {
+ 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "galleryAction" {
+//            if let titleName = (sender as? ImageGalleryTableViewCell)?.title {
+                if let cvc = segue.destination as? ImageGalleryViewController {
+//                    
+                }
+//            }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let beforeIdxPath = beforeIndexPath {
+        tableView.deselectRow(at: beforeIdxPath, animated: true)
+        }
+//        let cell = tableView.cellForRow(at: indexPath)
+        performSegue(withIdentifier: "galleryAction", sender: self)
+        
+        beforeIndexPath = indexPath
     }
 }
