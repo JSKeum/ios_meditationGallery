@@ -54,7 +54,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="galleryAction" id="gwd-Yp-SKl"/>
+                        <segue destination="DfX-Ea-CIw" kind="showDetail" identifier="galleryAction" id="gwd-Yp-SKl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bed-fr-SEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -83,7 +83,7 @@
                 <splitViewController modalPresentationStyle="fullScreen" id="ZXY-37-r1Y" sceneMemberID="viewController">
                     <connections>
                         <segue destination="zE7-v4-oDD" kind="relationship" relationship="masterViewController" id="cbj-3D-1ki"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="nLA-4I-fhs"/>
+                        <segue destination="DfX-Ea-CIw" kind="relationship" relationship="detailViewController" id="nLA-4I-fhs"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GjV-QB-TKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -99,7 +99,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V1c-3k-Tbe">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
+                                <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hRK-cr-uJL">
                                     <size key="itemSize" width="198" height="199"/>
@@ -159,6 +159,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="512.0603015075377" y="72.661870503597129"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ji5-NE-kHo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DfX-Ea-CIw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cTb-U0-DWa">
+                        <rect key="frame" x="0.0" y="0.0" width="818.5" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="u8K-9n-zov"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tri-qB-L7t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-195.47738693467338" y="72.661870503597129"/>
         </scene>
