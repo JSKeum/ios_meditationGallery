@@ -25,6 +25,9 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
             galleryCollectionView.dropDelegate = self
             
             galleryCollectionView.collectionViewLayout = ColumnFlowLayout()
+            
+            // 셀 간 간격 조정
+            galleryCollectionView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
     
@@ -39,6 +42,8 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
         
         if let customCell = cell as? ImageGalleryCollectionViewCell {
             customCell.cellImage.image = imageModel[indexPath.row]
+        
+//            customCell.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         return cell
     }
