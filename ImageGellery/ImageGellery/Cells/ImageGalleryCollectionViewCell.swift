@@ -10,12 +10,9 @@ import UIKit
 
 class ImageGalleryCollectionViewCell: UICollectionViewCell {
     
-    
     @IBOutlet weak var cellImage: UIImageView! {
         didSet {
             cellImage.sizeToFit()
-            
-//            self.bounds = CGSize(0, 0)
         }
     }
 }

@@ -24,7 +24,8 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
             galleryCollectionView.dragDelegate = self
             galleryCollectionView.dropDelegate = self
             
-            galleryCollectionView.collectionViewLayout = ColumnFlowLayout()
+//            galleryCollectionView.collectionViewLayout = ColumnFlowLayout()
+            galleryCollectionView.collectionViewLayout = MosaicLayout()
             
             // 셀 간 간격 조정
             galleryCollectionView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
