@@ -24,12 +24,13 @@ class ImageGalleryTableViewController: UITableViewController {
     private var deletedSection: Int? {
         return sections.firstIndex(of: "Unused List")
     }
+  
+    private var tableTitle: String = "Table"
     
     @IBAction func addGallery(_ sender: UIBarButtonItem) {
-        let newTitle = "newGallery"
         
         tableView.performBatchUpdates({
-            galleryList += [newTitle]
+            galleryList += [tableTitle]
             tableView.insertRows(at: [IndexPath(row: galleryList.count-1, section: gallerySection!)], with: .top)
         })
     }
@@ -118,11 +119,14 @@ extension ImageGalleryTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "galleryAction" {
-            //            if let titleName = (sender as? ImageGalleryTableViewCell)?.title {
-            if let cvc = segue.destination as? ImageGalleryViewController {
-                //
-            }
-            //            }
+            
+            guard let idx = tableView.indexPathForSelectedRow?.row else { return  }
+            
+            if let cvc = segue.destination as? ImageGalleryViewController, let title = galleryList[idx]{
+                
+                if (cvc.getGalleryTitle() == nil) { cvc.setGalleryTitle(title)
+                }
+            }                        
         }
     }
     
@@ -130,9 +134,10 @@ extension ImageGalleryTableViewController {
         if let beforeIdxPath = beforeIndexPath {
             tableView.deselectRow(at: beforeIdxPath, animated: true)
         }
-        //        let cell = tableView.cellForRow(at: indexPath)
+ 
+        if (indexPath.section == gallerySection) {
         performSegue(withIdentifier: "galleryAction", sender: self)
-        
+        }
         beforeIndexPath = indexPath
     }
 }

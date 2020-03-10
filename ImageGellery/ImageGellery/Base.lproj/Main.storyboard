@@ -54,7 +54,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="DfX-Ea-CIw" kind="showDetail" identifier="galleryAction" id="gwd-Yp-SKl"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="galleryAction" id="Off-Mt-qGd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bed-fr-SEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -99,7 +99,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V1c-3k-Tbe">
-                                <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
+                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hRK-cr-uJL">
                                     <size key="itemSize" width="198" height="199"/>
@@ -182,6 +182,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gwd-Yp-SKl"/>
+        <segue reference="Off-Mt-qGd"/>
     </inferredMetricsTieBreakers>
 </document>

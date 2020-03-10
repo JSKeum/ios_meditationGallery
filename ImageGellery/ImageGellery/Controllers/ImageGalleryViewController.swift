@@ -10,9 +10,12 @@ import UIKit
 
 class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    
+
 //    private var detailVC: ImageDetailViewController? = ImageDetailViewController()
     
-    var imageModel: [UIImage] = []
+//    var imageModel: [UIImage] = []
+    private var imageGallery = ImageGallery()
     
     // *** collectionVeiw stuffs
     @IBOutlet weak var galleryCollectionView: UICollectionView! {
@@ -33,7 +36,7 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        imageModel.count
+        return imageGallery.count
     }
     
     private let cellIdentifier = "imageCell"
@@ -42,7 +45,7 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         
         if let customCell = cell as? ImageGalleryCollectionViewCell {
-            customCell.cellImage.image = imageModel[indexPath.row]
+            customCell.cellImage.image = imageGallery[indexPath.row]
         
 //            customCell.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
@@ -51,6 +54,8 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("컨트롤러 시작합니다")
     }
 }
 
@@ -92,14 +97,14 @@ extension ImageGalleryViewController: UICollectionViewDragDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         // batch 핵심.. a bit complex code. collecionView에서 여러 작업을 수행할 때, 즉 동기화가 필요할 때는 아래처럼 batch closure로 감싸야 한다
         // 밑에 ?? indexpath가 언제 적용되는지 모르겠다..
-        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: imageModel.count, section: 0)
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: imageGallery.count, section: 0)
         for item in coordinator.items {
             if let sourceIndexPath = item.sourceIndexPath {
                 if let image = item.dragItem.localObject as? UIImage {
                     collectionView.performBatchUpdates({
                         // update model and collectionView synchronistically
-                        imageModel.remove(at: sourceIndexPath.item)
-                        imageModel.insert(image, at: destinationIndexPath.item)
+                        imageGallery.remove(at: sourceIndexPath.item)
+                        imageGallery.insert(image, at: destinationIndexPath.item)
                         collectionView.deleteItems(at: [sourceIndexPath])
                         collectionView.insertItems(at: [destinationIndexPath])
                     })
@@ -118,7 +123,7 @@ extension ImageGalleryViewController: UICollectionViewDragDelegate, UICollection
                     DispatchQueue.main.async {
                         if let image = provider as? UIImage {
                             placeholderContext.commitInsertion { insertionIndexPath in
-                                self.imageModel.insert(image, at: insertionIndexPath.item)
+                                self.imageGallery.insert(image, at: insertionIndexPath.item)
                             }
                         } else {
                             placeholderContext.deletePlaceholder()
@@ -137,7 +142,7 @@ extension ImageGalleryViewController {
             
         let detailVC = ImageDetailViewController()
         
-        let detailImg = imageModel[indexPath.item]
+        let detailImg = imageGallery[indexPath.item]
         detailVC.setImage(detailImg)
         
         navController.pushViewController(detailVC, animated: true)
@@ -148,5 +153,15 @@ extension ImageGalleryViewController {
 extension ImageGalleryViewController {
     typealias galleryCell = ImageGalleryCollectionViewCell
 
+}
+
+extension ImageGalleryViewController {
+    func setGalleryTitle(_ title: String) {
+        self.imageGallery.setTitle(title: title)
+    }
+    
+    func getGalleryTitle() -> String? {
+        return imageGallery.getTitle()
+    }
 }
 
