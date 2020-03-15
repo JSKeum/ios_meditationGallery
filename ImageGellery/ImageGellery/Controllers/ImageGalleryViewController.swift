@@ -9,13 +9,11 @@
 import UIKit
 
 class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    
 
 //    private var detailVC: ImageDetailViewController? = ImageDetailViewController()
     
 //    var imageModel: [UIImage] = []
-    private var imageGallery = ImageGallery()
+    private var imageGallery = Gallery<UIImage>()
     
     // *** collectionVeiw stuffs
     @IBOutlet weak var galleryCollectionView: UICollectionView! {
@@ -142,9 +140,10 @@ extension ImageGalleryViewController {
             
         let detailVC = ImageDetailViewController()
         
-        let detailImg = imageGallery[indexPath.item]
+        if let detailImg = imageGallery[indexPath.item] {
         detailVC.setImage(detailImg)
-        
+        }
+     
         navController.pushViewController(detailVC, animated: true)
     }
 }
