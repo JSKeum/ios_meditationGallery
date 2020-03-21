@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 struct Gallery<Element>: GenericGalleryProtocol {
     
     private var galleryModel: [Element?] = []
@@ -47,36 +45,6 @@ struct Gallery<Element>: GenericGalleryProtocol {
     typealias Item = Element
 
 }
-//
-//struct ImageGallery {
-//    private var imageModel: [UIImage] = []
-//    private var title: String? = nil
-//
-//    subscript(i: Int) -> UIImage {
-//        return imageModel[i]
-//
-//    }
-//
-//    mutating func remove(at sourceIndexPathItem: Int) {
-//        imageModel.remove(at: sourceIndexPathItem)
-//    }
-//
-//    mutating func insert(_ image: UIImage, at destinationIndexPathItem: Int) {
-//        imageModel.insert(image, at: destinationIndexPathItem)
-//    }
-//
-//    var count: Int {
-//        return imageModel.count
-//    }
-//
-//    mutating func setTitle(title: String) {
-//        self.title = title
-//    }
-//
-//    mutating func getTitle() -> String? {
-//        return self.title
-//    }
-//}
 
 protocol GenericGalleryProtocol {
     associatedtype Item
