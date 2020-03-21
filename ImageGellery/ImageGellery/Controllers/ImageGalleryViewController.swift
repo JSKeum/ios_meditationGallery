@@ -42,7 +42,7 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         
-        if let customCell = cell as? ImageGalleryCollectionViewCell {
+        if let customCell = cell as? GalleryCell {
             customCell.cellImage.image = imageGallery[indexPath.row]
         
 //            customCell.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -70,7 +70,7 @@ extension ImageGalleryViewController: UICollectionViewDragDelegate, UICollection
     }
     
     func dragCells(at indexPath: IndexPath) -> [UIDragItem] {
-        if let image = (galleryCollectionView.cellForItem(at: indexPath) as? ImageGalleryCollectionViewCell)?.cellImage.image {
+        if let image = (galleryCollectionView.cellForItem(at: indexPath) as? GalleryCell)?.cellImage.image {
             let dragItem = UIDragItem(itemProvider: NSItemProvider(object: image))
             dragItem.localObject = image
             return [dragItem]
@@ -150,7 +150,7 @@ extension ImageGalleryViewController {
 
 // typealiases
 extension ImageGalleryViewController {
-    typealias galleryCell = ImageGalleryCollectionViewCell
+    typealias GalleryCell = ImageGalleryCollectionViewCell
 
 }
 

@@ -12,20 +12,44 @@
         <scene sceneID="GgB-8J-Omq">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="qJ7-27-Qcr" customClass="ImageGalleryTableViewController" customModule="ImageGellery" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wu8-Nc-Jx1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Wu8-Nc-Jx1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextField" id="T4k-Te-97B" customClass="TextFieldTableViewCell" customModule="ImageGellery" customModuleProvider="target">
+                                <rect key="frame" x="16" y="55.5" width="343" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T4k-Te-97B" id="kDB-sX-zVm">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="34.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uor-iE-68C">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="34.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uor-iE-68C" firstAttribute="top" secondItem="kDB-sX-zVm" secondAttribute="top" id="8Xq-2Z-eKc"/>
+                                        <constraint firstAttribute="bottom" secondItem="uor-iE-68C" secondAttribute="bottom" id="h2h-qv-aGY"/>
+                                        <constraint firstItem="uor-iE-68C" firstAttribute="leading" secondItem="kDB-sX-zVm" secondAttribute="leading" id="j0x-OA-QGL"/>
+                                        <constraint firstAttribute="trailing" secondItem="uor-iE-68C" secondAttribute="trailing" id="yRr-NU-PMi"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="uor-iE-68C" id="MoT-ra-82m"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="galleryTitle" id="O0E-LY-QcC" customClass="ImageGalleryTableViewCell" customModule="ImageGellery" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                <rect key="frame" x="16" y="90" width="343" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O0E-LY-QcC" id="t8t-3M-tC0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bg-Ot-J8j">
-                                            <rect key="frame" x="170.5" y="11.5" width="34" height="21"/>
+                                            <rect key="frame" x="154.5" y="11.5" width="34" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -49,7 +73,7 @@
                     <navigationItem key="navigationItem" title="Image Gallery" id="HB4-Yr-BcV">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="IPG-WS-lpz">
                             <connections>
-                                <action selector="addGallery:" destination="qJ7-27-Qcr" id="J1n-aA-nq5"/>
+                                <action selector="changeToAddingMode:" destination="qJ7-27-Qcr" id="J1n-aA-nq5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

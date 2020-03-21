@@ -24,16 +24,26 @@ class ImageGalleryTableViewController: UITableViewController {
     private var deletedSection: Int? {
         return sections.firstIndex(of: "Unused List")
     }
-  
+    
     private var tableTitle: String = "Table"
     
-    @IBAction func addGallery(_ sender: UIBarButtonItem) {
-        
+    private var isAdding: Bool = false
+    
+    @IBAction func changeToAddingMode(_ sender: UIBarButtonItem) {
+        if (!isAdding) {
+            isAdding = true
+            galleryList = [""] + galleryList
+            tableView.insertRows(at: [IndexPath(row: 0, section: gallerySection!)], with: .top)
+        }
+    }
+    
+    func addGallery() {
         tableView.performBatchUpdates({
             galleryList += [tableTitle]
-            tableView.insertRows(at: [IndexPath(row: galleryList.count-1, section: gallerySection!)], with: .top)
+            tableView.insertRows(at: [IndexPath(row: 0, section: gallerySection!)], with: .top)
         })
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,16 +72,41 @@ class ImageGalleryTableViewController: UITableViewController {
     
     private let cellIdentifier = "galleryTitle"
     
+    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if let inputCell = cell as? TextFieldTableViewCell {
+//            inputCell.textField.becomeFirstResponder()
+//        }
+//    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
-        // custom cell
-        if let titleCell = cell as? ImageGalleryTableViewCell {
-            titleCell.title?.text = (indexPath.section == gallerySection) ? galleryList[indexPath.row] : unusedGalleryList[indexPath.row]
+        if (isAdding && (indexPath == IndexPath(row: 0, section: gallerySection!))) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TextField", for: indexPath)
+            if let inputCell = cell as? TextFieldTableViewCell {
+                inputCell.textField.becomeFirstResponder()
+                inputCell.resignationClousre = { [weak self, unowned inputCell] in
+                    if let text = inputCell.textField.text {
+                        
+                        self?.galleryList[0] = text
+                    }
+                    self?.isAdding = false
+                    // 지금은 batch 대신 reloadData를 써야겠다.
+                    tableView.reloadData()
+                }
+            }
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            
+            // custom cell
+            if let titleCell = cell as? ImageGalleryTableViewCell {
+                titleCell.title?.text = (indexPath.section == gallerySection) ? galleryList[indexPath.row] : unusedGalleryList[indexPath.row]
+            }
+            
+            return cell
         }
-        
-        return cell
     }
     
     // swipe delete
@@ -87,8 +122,8 @@ class ImageGalleryTableViewController: UITableViewController {
                     
                     galleryList.remove(at: indexPath.row)
                     unusedGalleryList.insert(deletedItem, at: 0)
-                           
-                     tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: deletedSection!))
+                    
+                    tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: deletedSection!))
                 })
             }
                 
@@ -134,9 +169,9 @@ extension ImageGalleryTableViewController {
         if let beforeIdxPath = beforeIndexPath {
             tableView.deselectRow(at: beforeIdxPath, animated: true)
         }
- 
+        
         if (indexPath.section == gallerySection) {
-        performSegue(withIdentifier: "galleryAction", sender: self)
+            performSegue(withIdentifier: "galleryAction", sender: self)
         }
         beforeIndexPath = indexPath
     }
