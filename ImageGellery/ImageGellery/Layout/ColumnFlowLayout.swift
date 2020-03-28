@@ -24,5 +24,9 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
         self.itemSize = CGSize(width: cellWidth, height: cellWidth*1.161)
         self.sectionInset = UIEdgeInsets(top: self.minimumInteritemSpacing, left: 0.0, bottom: 0.0, right: 0.0 )
         self.sectionInsetReference = .fromSafeArea
+        
+        
+        self.headerReferenceSize = CGSize(width: cv.frame.width, height: 50)
+
     }
 }

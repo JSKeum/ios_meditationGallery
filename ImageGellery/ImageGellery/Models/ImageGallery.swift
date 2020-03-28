@@ -26,8 +26,8 @@ struct Gallery<Element>: GenericGalleryProtocol {
         galleryModel.insert(item, at: destinationIndexPathItem)
     }
     
-    func getTitle() -> String {
-        guard let title = self.title else { return "" }
+    func getTitle() -> String? {
+        guard let title = self.title else { return nil }
         return title
     }
     
@@ -52,7 +52,7 @@ protocol GenericGalleryProtocol {
     mutating func remove(at sourceIndexPathItem: Int)
     mutating func insert(_ image: Item, at destinationIndexPathItem: Int)
     
-    func getTitle() -> String
+    func getTitle() -> String?
     mutating func setTitle(title: String)
     
     subscript(i: Int) -> Item? { get }

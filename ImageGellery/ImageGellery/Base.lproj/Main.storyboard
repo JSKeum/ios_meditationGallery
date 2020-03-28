@@ -123,31 +123,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V1c-3k-Tbe">
-                                <rect key="frame" x="0.0" y="0.0" width="818.5" height="814"/>
+                                <rect key="frame" x="0.0" y="50" width="818.5" height="764"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hRK-cr-uJL">
                                     <size key="itemSize" width="198" height="199"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="80"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="imageCell" id="jEt-Id-yqN" customClass="ImageGalleryCollectionViewCell" customModule="ImageGellery" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="199"/>
+                                        <rect key="frame" x="0.0" y="80" width="198" height="199"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mCa-fM-Iph">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hC2-ow-S95">
-                                                    <rect key="frame" x="20" y="20" width="158" height="159"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="199"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="hC2-ow-S95" firstAttribute="top" secondItem="mCa-fM-Iph" secondAttribute="top" constant="20" symbolic="YES" id="6hH-WE-V4l"/>
-                                                <constraint firstItem="hC2-ow-S95" firstAttribute="leading" secondItem="mCa-fM-Iph" secondAttribute="leading" constant="20" symbolic="YES" id="JJb-UN-yjl"/>
-                                                <constraint firstAttribute="bottom" secondItem="hC2-ow-S95" secondAttribute="bottom" constant="20" symbolic="YES" id="ii7-no-5w6"/>
-                                                <constraint firstAttribute="trailing" secondItem="hC2-ow-S95" secondAttribute="trailing" constant="20" symbolic="YES" id="wse-dZ-TKL"/>
+                                                <constraint firstItem="hC2-ow-S95" firstAttribute="top" secondItem="mCa-fM-Iph" secondAttribute="top" id="6hH-WE-V4l"/>
+                                                <constraint firstItem="hC2-ow-S95" firstAttribute="leading" secondItem="mCa-fM-Iph" secondAttribute="leading" id="JJb-UN-yjl"/>
+                                                <constraint firstAttribute="bottom" secondItem="hC2-ow-S95" secondAttribute="bottom" id="ii7-no-5w6"/>
+                                                <constraint firstAttribute="trailing" secondItem="hC2-ow-S95" secondAttribute="trailing" id="wse-dZ-TKL"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -157,7 +157,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DropCell" id="lHl-6d-dWi">
-                                        <rect key="frame" x="208" y="1.5" width="198" height="196"/>
+                                        <rect key="frame" x="208" y="81.5" width="198" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zwQ-Et-tCC">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="196"/>
@@ -166,6 +166,26 @@
                                         <size key="customSize" width="198" height="196"/>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewTitle" id="Mp1-qE-bjP" customClass="ImageGalleryCollectionReusableView" customModule="ImageGellery" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="818.5" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6w-CF-VLa">
+                                            <rect key="frame" x="392.5" y="15" width="34" height="50"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="I6w-CF-VLa" firstAttribute="centerY" secondItem="Mp1-qE-bjP" secondAttribute="centerY" id="Z2Y-el-tk9"/>
+                                        <constraint firstItem="I6w-CF-VLa" firstAttribute="top" secondItem="Mp1-qE-bjP" secondAttribute="topMargin" constant="7" id="cnz-hW-Rjb"/>
+                                        <constraint firstItem="I6w-CF-VLa" firstAttribute="centerX" secondItem="Mp1-qE-bjP" secondAttribute="centerX" id="qyA-cH-ljP"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="title" destination="I6w-CF-VLa" id="xao-o0-YM3"/>
+                                    </connections>
+                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -206,6 +226,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Off-Mt-qGd"/>
+        <segue reference="u8K-9n-zov"/>
     </inferredMetricsTieBreakers>
 </document>

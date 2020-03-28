@@ -9,11 +9,13 @@
 import UIKit
 
 class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-//    private var detailVC: ImageDetailViewController? = ImageDetailViewController()
     
-//    var imageModel: [UIImage] = []
+    //    private var detailVC: ImageDetailViewController? = ImageDetailViewController()
+    
+    //    var imageModel: [UIImage] = []
     private var imageGallery = Gallery<UIImage>()
+    
+    private var galleryTitle: String?
     
     // *** collectionVeiw stuffs
     @IBOutlet weak var galleryCollectionView: UICollectionView! {
@@ -25,8 +27,9 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
             galleryCollectionView.dragDelegate = self
             galleryCollectionView.dropDelegate = self
             
-//            galleryCollectionView.collectionViewLayout = ColumnFlowLayout()
-            galleryCollectionView.collectionViewLayout = MosaicLayout()
+            galleryCollectionView.collectionViewLayout = ColumnFlowLayout()
+            //            galleryCollectionView.collectionViewLayout = MosaicLayout()
+            
             
             // 셀 간 간격 조정
             galleryCollectionView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -34,18 +37,21 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return imageGallery.count
     }
     
     private let cellIdentifier = "imageCell"
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         
         if let customCell = cell as? GalleryCell {
             customCell.cellImage.image = imageGallery[indexPath.row]
-        
-//            customCell.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            //            customCell.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         return cell
     }
@@ -53,7 +59,15 @@ class ImageGalleryViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("컨트롤러 시작합니다")
+        print("CollectionView Controller 생성")
+    }
+    
+    var closureFromTableView: (() -> Void)?
+    override func viewDidAppear(_ animated: Bool) {
+        
+        closureFromTableView?()
+        
+        galleryCollectionView.backgroundColor = (getGalleryTitle() == nil) ? .gray : .clear
     }
 }
 
@@ -95,6 +109,9 @@ extension ImageGalleryViewController: UICollectionViewDragDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         // batch 핵심.. a bit complex code. collecionView에서 여러 작업을 수행할 때, 즉 동기화가 필요할 때는 아래처럼 batch closure로 감싸야 한다
         // 밑에 ?? indexpath가 언제 적용되는지 모르겠다..
+        
+        guard getGalleryTitle() != nil else { return }
+        
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: imageGallery.count, section: 0)
         for item in coordinator.items {
             if let sourceIndexPath = item.sourceIndexPath {
@@ -136,14 +153,15 @@ extension ImageGalleryViewController: UICollectionViewDragDelegate, UICollection
 // delegate - handle Selection
 extension ImageGalleryViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         guard let navController = self.navigationController else { return }
-            
+        
         let detailVC = ImageDetailViewController()
         
         if let detailImg = imageGallery[indexPath.item] {
-        detailVC.setImage(detailImg)
+            detailVC.setImage(detailImg)
         }
-     
+        
         navController.pushViewController(detailVC, animated: true)
     }
 }
@@ -151,16 +169,46 @@ extension ImageGalleryViewController {
 // typealiases
 extension ImageGalleryViewController {
     typealias GalleryCell = ImageGalleryCollectionViewCell
-
 }
 
 extension ImageGalleryViewController {
-    func setGalleryTitle(_ title: String) {
-        self.imageGallery.setTitle(title: title)
-    }
     
+    /// Get the title of imageGallery
     func getGalleryTitle() -> String? {
         return imageGallery.getTitle()
     }
+    
+    /// Set gallery title of ColletionView
+    func setGalleryTitle(_ title: String) {
+        self.imageGallery.setTitle(title: title)
+        
+    }
 }
 
+// CollectionView Header
+extension ImageGalleryViewController {
+    
+    // Supplementary View - CollectionView Title
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let reuseIdentifier = "CollectionViewTitle"
+        
+        switch kind {
+            
+        case UICollectionView.elementKindSectionHeader:
+            
+            let titleView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath)
+            
+            if let customTitleView = titleView as? ImageGalleryCollectionReusableView {
+                customTitleView.backgroundColor = .clear
+                customTitleView.title.text = getGalleryTitle() ?? ""
+                
+            }
+            
+            return titleView
+        default:
+            assert(false, "invalid type")
+        }
+        
+    }
+}

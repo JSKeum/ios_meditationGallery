@@ -73,11 +73,11 @@ class ImageGalleryTableViewController: UITableViewController {
     private let cellIdentifier = "galleryTitle"
     
     
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if let inputCell = cell as? TextFieldTableViewCell {
-//            inputCell.textField.becomeFirstResponder()
-//        }
-//    }
+    //    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        if let inputCell = cell as? TextFieldTableViewCell {
+    //            inputCell.textField.becomeFirstResponder()
+    //        }
+    //    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -159,19 +159,24 @@ extension ImageGalleryTableViewController {
             
             if let cvc = segue.destination as? ImageGalleryViewController, let title = galleryList[idx]{
                 
-                if (cvc.getGalleryTitle() == nil) { cvc.setGalleryTitle(title)
+                if (cvc.getGalleryTitle() == nil) { cvc.closureFromTableView = { [weak cvc] in
+                    cvc?.setGalleryTitle(title)
+                    }
+                    
                 }
             }                        
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let beforeIdxPath = beforeIndexPath {
-            tableView.deselectRow(at: beforeIdxPath, animated: true)
-        }
-        
-        if (indexPath.section == gallerySection) {
-            performSegue(withIdentifier: "galleryAction", sender: self)
+        if ( beforeIndexPath != indexPath ) {
+            if let beforeIdxPath = beforeIndexPath {
+                tableView.deselectRow(at: beforeIdxPath, animated: true)
+            }
+            
+            if (indexPath.section == gallerySection) {
+                performSegue(withIdentifier: "galleryAction", sender: self)
+            }
         }
         beforeIndexPath = indexPath
     }
