@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  MeditationGallery
+//  ImageGellery
 //
-//  Created by JSKeum on 2020/01/07.
+//  Created by JSKeum on 2020/02/12.
 //  Copyright © 2020 JSKeum. All rights reserved.
 //
 

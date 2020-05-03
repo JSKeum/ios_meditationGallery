@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MeditationGallery.xcodeproj">
+      location = "self:ImageGellery.xcodeproj">
    </FileRef>
 </Workspace>

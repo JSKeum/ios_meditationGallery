@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  MeditationGallery
+//  ImageGellery
 //
-//  Created by JSKeum on 2020/01/07.
+//  Created by JSKeum on 2020/02/12.
 //  Copyright © 2020 JSKeum. All rights reserved.
 //
 
@@ -10,8 +10,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
